@@ -1,0 +1,129 @@
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+CREATE TABLE `departamentos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+INSERT INTO `departamentos` (`id`, `nombre`) VALUES
+(1, 'Antioquia'),
+(2, 'Valle'),
+(3, 'Cundinamarca'),
+(4, 'Atlantico'),
+(5, 'Santander');
+
+
+CREATE TABLE `generos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `generos` (`id`, `nombre`) VALUES
+(1, 'Masculino'),
+(2, 'Femenino');
+
+
+CREATE TABLE `municipios` (
+  `id` int(11) NOT NULL,
+  `departamento_id` int(11) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `municipios` (`id`, `departamento_id`, `nombre`) VALUES
+(1, 1, 'Medellín'),
+(2, 1, 'Envigado'),
+(3, 2, 'Cali'),
+(4, 2, 'Palmira'),
+(5, 3, 'Bogotá'),
+(6, 3, 'Soacha'),
+(7, 4, 'Barranquilla'),
+(8, 4, 'Soledad'),
+(9, 5, 'Bucaramanga'),
+(10, 5, 'Girón');
+
+
+
+CREATE TABLE `pacientes` (
+  `id` int(11) NOT NULL,
+  `tipo_documento_id` int(11) DEFAULT NULL,
+  `numero_documento` varchar(20) DEFAULT NULL,
+  `nombre1` varchar(50) DEFAULT NULL,
+  `nombre2` varchar(50) DEFAULT NULL,
+  `apellido1` varchar(50) DEFAULT NULL,
+  `apellido2` varchar(50) DEFAULT NULL,
+  `genero_id` int(11) DEFAULT NULL,
+  `departamento_id` int(11) DEFAULT NULL,
+  `municipio_id` int(11) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+INSERT INTO `pacientes` (`id`, `tipo_documento_id`, `numero_documento`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `genero_id`, `departamento_id`, `municipio_id`, `foto`) VALUES
+(8, 1, '1104936968', 'carlos ', 'eduardo', 'rodriguez ', 'cardenas', 1, 4, 8, 'uploads/1767882845_user-profile-sign-on-white-background-vector.jpg');
+
+-- --------------------------------------------------------
+
+
+CREATE TABLE `tipos_documento` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `tipos_documento` (`id`, `nombre`) VALUES
+(1, 'Cédula'),
+(2, 'Tarjeta Identidad');
+
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `documento` varchar(20) DEFAULT NULL,
+  `clave` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `usuarios` (`id`, `documento`, `clave`) VALUES
+(1, 'admin', '1234567890');
+
+
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `generos`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `municipios`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `pacientes`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `tipos_documento`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `pacientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
+
